@@ -4,6 +4,7 @@
         
         <Sidebar/>
         <v-app-bar app>
+             <v-app-bar-nav-icon @click="toggle"></v-app-bar-nav-icon>
             <v-spacer></v-spacer>
             <Profile/>
         </v-app-bar>
@@ -29,6 +30,13 @@ export default {
         Sidebar,
         Profile
  
-    }
+    },
+
+    methods: {
+         toggle() {
+        this.$store.commit('toggleSideBar')
+        console.log(this.$store.state.sidebar, 'sidebar')
+      },
+    },
 }
 </script>
