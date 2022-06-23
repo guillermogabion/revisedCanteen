@@ -1,5 +1,5 @@
 <template>
     <div>
-        this is Announcements
+        this is Orders
     </div>
 </template>

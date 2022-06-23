@@ -1,5 +1,5 @@
 <template>
     <div>
-        this is Instructors
+        this is Add Ons
     </div>
 </template>

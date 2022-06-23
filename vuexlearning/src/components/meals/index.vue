@@ -4,7 +4,7 @@
         <v-card
        
         >
-            THis is student
+           THis is MEals
         </v-card>
     </div>
 </template>

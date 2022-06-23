@@ -1,9 +1,10 @@
-import Grades from '@/components/grades/index.vue'
-import Instructors from '@/components/instructors/index.vue'
-import Students from '@/components/students/index.vue'
-import Subject from '@/components/subjects/index.vue'
-import Announcements from '@/components/announcements/index.vue'
+import Purchases from '@/components/purchases/index.vue'
+import Orders from '@/components/orders/index.vue'
+import Meals from '@/components/meals/index.vue'
+import Addons from '@/components/addons/index.vue'
+import Payment from '@/components/payment/index.vue'
 import Dashboard from '@/components/dashboard/index.vue'
+import Users from '@/components/user/index.vue'
 
 export default [{
 
@@ -17,36 +18,44 @@ export default [{
 
     },
     {
-        path: '/grades',
-        name: 'grades',
-        component: Grades,
+        path: '/purchases',
+        name: 'purchases',
+        component: Purchases,
         meta: { authOnly: true }
     },
     {
-        path: '/instructors',
-        name: 'instructors',
-        component: Instructors,
+        path: '/orders',
+        name: 'orders',
+        component: Orders,
         meta: { authOnly: true }
     },
     {
-        path: '/students',
-        name: 'students',
-        component: Students,
+        path: '/meals',
+        name: 'meals',
+        component: Meals,
         meta: { authOnly: true }
 
     },
     {
-        path: '/subjects',
-        name: 'subject',
-        component: Subject,
+        path: '/addons',
+        name: 'addons',
+        component: Addons,
         meta: { authOnly: true }
     },
     {
-        path: '/announcements',
-        name: 'announcements',
-        component: Announcements,
+        path: '/payments',
+        name: 'payment',
+        component: Payment,
+        meta: { authOnly: true }
+
+    },
+    {
+        path: '/users',
+        name: 'users',
+        component: Users,
         meta: { authOnly: true }
 
     }
+
 ]
 

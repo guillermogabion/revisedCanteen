@@ -1,5 +1,5 @@
 <template>
     <div>
-        this is grades
+        this is Payments
     </div>
 </template>

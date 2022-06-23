@@ -1,5 +1,5 @@
 <template>
     <div>
-        this is Subjects
+        this is Purchases
     </div>
 </template>

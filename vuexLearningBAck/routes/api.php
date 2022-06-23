@@ -19,6 +19,7 @@ Route::post('UserRegistration','UserController@UserRegistration');
 Route::post('/logout', 'UserControler@logout')->middleware('auth:api');
 
 Route::get('index', 'UserController@index');
+Route::post('saveNew', 'UserController@saveNew');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('self', 'UserController@self');

@@ -39,4 +39,23 @@ class UserController extends Controller
     public function index(){
         return User::get();
     }
+
+    public function saveNew(Request $request) 
+    {
+        $user = New User;
+        $user->lastname = $request->lastname;
+        $user->firstname = $request->firstname;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        if($request->password){
+            $user->password = Hash::make($request->password);
+        }
+        if($request->user_type){
+            $user->user_type = $request->user_type;
+        }
+        $user->save();
+        return $user;
+
+    }
+
 }

@@ -201,10 +201,10 @@ import logo from '@/assets/images/logo.png'
         </template>
       </v-list>
       <template v-slot:append>
-                <div class="pa-2">
+                <div class="pa-2"  style="padding-left: 30%;">
                     <template v-if="drawer">
                         <v-btn icon @click.stop="logout()">
-                            <v-icon>mdi-logout-variant</v-icon>
+                           <span> Logout </span>
                         </v-btn>
                     </template>
                     <template v-else>
@@ -231,11 +231,11 @@ import logo from '@/assets/images/logo.png'
       logo,
       items: [
         { icon: 'mdi-view-dashboard', text: 'Dashboard' ,url:'/' },
-        { icon: 'mdi-history', text: 'Purchases' ,url:'/purchase' },
-        { icon: 'mdi-cart', text: 'Orders' ,url:'/order' },
-        { icon: 'mdi-food', text: 'Meals' ,url:'/meal' },
-        { icon: 'mdi-food-fork-drink', text: 'Add Ons' ,url:'/add_on' },
-        { icon: 'mdi mdi-coin', text: 'Payments' ,url:'/payment' },
+        { icon: 'mdi-history', text: 'Purchases' ,url:'/purchases' },
+        { icon: 'mdi-cart', text: 'Orders' ,url:'/orders' },
+        { icon: 'mdi-food', text: 'Meals' ,url:'/meals' },
+        { icon: 'mdi-food-fork-drink', text: 'Add Ons' ,url:'/addons' },
+        { icon: 'mdi-cash-check', text: 'Payments' ,url:'/payments' },
    
         {
           icon: 'mdi-settings',
@@ -243,7 +243,7 @@ import logo from '@/assets/images/logo.png'
           text: 'Settings',
           model: false,
           children: [
-            { icon: 'mdi mdi-account-edit', text: 'User Settings' , url:'/user'        
+            { icon: 'mdi mdi-account-edit', text: 'User Settings' , url:'/users'        
             },
             // { icon: 'mdi-account-group', text: 'View All User' , url:'/view'        
             // },
