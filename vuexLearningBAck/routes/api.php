@@ -18,11 +18,20 @@ Route::post('UserRegistration','UserController@UserRegistration');
 
 Route::post('/logout', 'UserControler@logout')->middleware('auth:api');
 
-Route::get('index', 'UserController@index');
-Route::post('saveNew', 'UserController@saveNew');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('self', 'UserController@self');
+    
+    // user
+    Route::post('saveNew', 'UserController@saveNew');
+    Route::post('editUser/{id}', 'UserController@editUser');
+    Route::get('users/pagination','UserController@pagination');
+    Route::delete('deleteUser/{id}','UserController@deleteUser');
+
+    // meal 
+    Route::post('addMeal', 'MealController@addMeal');
+    Route::post('updateMeal/{id}', 'MealController@updateMeal');
+    Route::delete('removeMeal', 'MealController@removeMeal');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

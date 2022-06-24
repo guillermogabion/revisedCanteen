@@ -1,7 +1,9 @@
-<template>
+<template> 
+<v-app>
     <div :is="layout">
 
     </div>
+</v-app>
 </template>
 <script>
 let layouts = require.context('./layouts/', true, /\.vue$/i)

@@ -58,4 +58,51 @@ class UserController extends Controller
 
     }
 
+    public function editUser(Request $request, $id){
+        $user = User::findorfail($id);
+        $user->lastname = $request->lastname;
+        $user->firstname = $request->firstname;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        if($request->user_type){
+            $user->user_type = $request->user_type;
+        }
+        $user->save();
+        return $user;
+
+    }
+    public function pagination(Request $request){
+        $users = User::query();
+        $users->where('user_type', 0);
+        if($request->input('keyword') != ""){
+            $keyword = $request->input('keyword');
+            $users->where(function($query) use($keyword){
+                $query   ->where('firstname', 'LIKE', "%$keyword%");
+                      
+            });
+        }
+        return $users->orderBy('firstname', 'asc')->paginate(10);
+    }
+    public function search(Request $request) 
+    {
+        $user = User::query();
+        $user->where('user_type', 0);
+        if ($request->input('searchkey') != "") {
+            $keyword = $request->input('searchkey');
+            $user->where(function($query) use($keyword) {
+                $query  ->where('firstname', 'LIKE', "%$keyword%")
+                        ->orWhere('lastname', 'LIKE', "%$keyword%")
+                        ->orWhere('email', 'LIKE', "%$keyword%");
+                         
+            });
+        }
+        return $user->orderBy('first_name', 'asc')->get();
+    }
+
+    public function deleteUser($id){
+        $user = User::find($id);
+        $user->delete();
+        return 'Deleted';
+    }
+
 }

@@ -1,18 +1,19 @@
-<template>
-    <v-dialog
-      v-model="dialog"
-        persistent
-        width="30%"
-    >
-    <v-form
+ <template>
+    <div>
+        <v-card
+        >
+            <v-form
             ref="form"
             lazy-validation
             v-model="valid"
             class="padding"
+          
         >
-      <v-card>
+      <v-card
+      height = "500"
+      >
         <div class="card-text">
-            <span class="card-text-item"> Create New User </span>
+            <span class="card-text-item"> Edit User's Information</span>
         </div>
             <div class="card-text-input">
                     <v-flex xs10>
@@ -54,7 +55,7 @@
                     </v-flex>
                      <v-flex xs10>
                         <v-select dense v-model="types" :items="user_type" item-text="type"  item-value="number"
-                            persistent-hint return-object prepend-icon="mdi-map" label="User Type">
+                            persistent-hint return-object prepend-icon="mdi-account-key" label="User Type">
                         </v-select>    
                     </v-flex>
                 </div>
@@ -66,7 +67,7 @@
                     color="primary"
                     class="mb-2"
                     dark   
-                    @click.prevent ="savenew()"  
+                    @click = "editUser()"
                     :disabled="!valid"        
                 >
                     Save
@@ -85,39 +86,37 @@
         </v-card-actions>
      </v-card>
     </v-form>
-     <v-snackbar
+    <!-- <v-snackbar
     v-model="snackbar"
     :timeout="timeout"
     color="success"
     top 
     right
     >
-      New User Added
-    </v-snackbar>
-    </v-dialog>
-   
-</template>
-<script>
-// import axios from '@/plugins/axios'
- import { addUsers } from '@/repositories/user.api'
- export default {
-    data() {
-        return {
-            user_type:[
+      Updated
+    </v-snackbar> -->
+        </v-card>
+    </div>
+ </template>
+
+ <script>
+    // import axios from '@/plugins/axios'
+ import { editUser } from '@/repositories/user.api'
+    export default {
+        
+        props: [ 'item' ],
+        data() {
+            return {
+                snackbar: false,
+                timeout: 1400,
+                drawer: true,
+                payload: [],
+                 user_type:[
                 {type: 'Client', number:'0', icon:'mdi-alert-circle'},
                 {type: 'Administrator', number:'1', icon:'mdi-alert-circle'},
             ],
-             payload: {
-                lastname: '',
-                firstname: '',
-                email: '',
-                phone: '',
-                user_type: '',
-            },
-            snackbar: false,
-            timeout: 1400,
             valid: true,
-             firstnameRules: [
+            firstnameRules: [
             v => !!v || 'First Name is required',
             v => (v && v.length <= 20) || 'First Name must be less than 20 characters',
             ],
@@ -133,59 +132,31 @@
             v => !!v || 'Phone is required',
             v => (v && v.length <= 8) || 'Phone Number must be less than 9 characters',
             ],
-            types: {type: 'Client', number:'0', icon:'mdi-alert-circle'},
-           
-        }
-    },
-    methods: {
-        savenew(){
-            // console.log(this.payload.user_type.number)
-            this.payload.user_type = this.types.number
-            // console.log(this.payload.user_type)
-            addUsers(this.payload).then(({response}) => {
-              console.log(response)
-               this.$emit('reload')
-               this.snackbar = true
-               this.clearInput()
-            })
+            types:'',
+            }
         },
-        clearInput(){
-            this.payload.lastname = ''
-            this.payload.firstname = '' 
-            this.payload.email = ''
-            this.payload.phone = ''
-            this.types = ''
+        methods: {
+            editUser(){
+                this.payload.user_type = this.types.number
+                editUser(this.payload.id, this.payload).then(({res}) => {
+                    console.log(res)
+                    //  this.snackbar = true
+                     this.$emit('closeDrawer')
+                })
+            }, 
+            close(){
+                this.$emit('closeDraw')
+            }
         },
-        close(){
-             this.$emit('close')
-        }
-    },
-     props: {
-        dialog:{
-            required: true,
-            type: Boolean,
-            default: false
+        watch: {
+        '$store.getters.newRequestedId'(newVal) {
+            if(newVal) {
+            console.log('sad')
+            }
         },
-        id:{
-            type:Number,
-        }
-    },
-  
- }
-</script>
-
-<style>
-    .card-text{
-        padding-top: 5%; 
-        padding-left: 5%;
+        'item'() {
+            this.payload = JSON.parse(JSON.stringify(this.item))
+        },
+     }
     }
-    .card-text-item {
-        font-size: 150%;
-    }
-    .card-text-input {
-        padding-left: 15%;
-    }
-    .card-text-button {
-        padding-right: 3%;
-    }
-</style>
+ </script>
