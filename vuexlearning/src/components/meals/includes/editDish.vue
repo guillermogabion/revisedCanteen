@@ -1,6 +1,8 @@
 <template>
     <div>
-        <v-card>
+        <v-card
+        
+        >
             <v-form
                 ref="form"
                 lazy-validation
@@ -17,40 +19,28 @@
                         Edit Dish Information
                     </v-toolbar>
                      <v-flex xs12>
-                            <div class="js--image-preview" style="margin: auto; padding-left: 35%; padding-top: 5%;">
-                                <!-- <v-img
-                                 style="width: 200px; height: 134px;"
-                                 :src="this.payload.image"
-                                > -->
-                                     <v-img
-                                        :src="payload.image"
-                                        height="125"
-                                        class="grey darken-4"
-                                        ></v-img>
-                                <!-- <img :src="payload.image" alt=""> -->
-                                <!-- </v-img> -->
+                            <div class="js--image-preview" style="margin: auto; padding-left: 30%; padding-top: 5%;">
+                                <v-img
+                                 style="width: 200px; height: 180px;"
+                                 :src="payload.image "
+                                >
+                                    
+                                </v-img>
                                 <!-- {{payload.image}} -->
                             </div>
                             <div class="upload-options" required style="padding-top: 15px;  padding-left: 29%;">
                                 <label>
                                     <input type="file"
-                                            id="fileData"
-                                            @change="onFileChange"
-                                            style="padding-left: 20%;"
-                                            class="custom-file-input"
+                                        id="fileData"
+                                        @change="onFileChange"
+                                        style="padding-left: 20%;"
+                                        class="custom-file-input"
                                     />
                                 </label>
-
-                               
-                                <!-- <v-file-input
-                                    id="fileData"
-                                    @change="onFileChange"
-                                    style="padding-left: 20%;"
-                                ></v-file-input>     -->
                             </div>
                          
                         </v-flex>
-                        <v-flex xs12>
+                        <v-flex xs10>
                             <v-text-field
                             v-model = "payload.name"
                             label="Name"
