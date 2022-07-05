@@ -5,40 +5,47 @@
           max-width="344"
           outlined
         >
-          <v-list-item three-line>
-            <v-list-item-content>
-              <div class="text-overline mb-4 login-page-title">
-               Login Page
-              </div>
-            </v-list-item-content>
-          </v-list-item>
-            <v-text-field
-              v-model="email"                   
-              color="purple darken-2"
-              label="Email"
-              type="email"
-              required
-              class="login-page-text-field"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"          
-              color="blue darken-2"
-              label="Password"
-              type="password"
-              required
-               class="login-page-text-field"
-            ></v-text-field>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              outlined  
-              @click="Login()"
-              color="primary"
-            >
-              Login
-            </v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
+            <v-list-item three-line>
+              <v-list-item-content>
+                
+                <v-img contain
+                    :src="logo"
+                    size="2"
+                    max-height="150"
+                    max-width="200"
+                    padding-top= "10%"
+                    class="mx-auto"
+                  />
+              
+              </v-list-item-content>
+            </v-list-item>
+              <v-text-field
+                v-model="email"                   
+                color="purple darken-2"
+                label="Email"
+                type="email"
+                required
+                class="login-page-text-field"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"          
+                color="blue darken-2"
+                label="Password"
+                type="password"
+                required
+                class="login-page-text-field"
+              ></v-text-field>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                outlined  
+                @click="Login()"
+                color="primary"
+              >
+                Login
+              </v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
         </v-card>
   </div>
 </template>
@@ -48,12 +55,12 @@
 
 
 <script>
-
+  import logo from '@/assets/images/logo.png'
    import { login } from "@/repositories/user.api";
 export default {
     data(){
         return {
-       
+            logo,
             email: '',
             password: ''
      
@@ -106,6 +113,10 @@ export default {
 }
 .login-page-title{
   padding-left: 6.5em;
+}
+.padding{
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 </style>

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('login','UserController@login');
 Route::post('UserRegistration','UserController@UserRegistration');
+Route::post('addMeal', 'MealController@addMeal');
 
 Route::post('/logout', 'UserControler@logout')->middleware('auth:api');
 
@@ -29,9 +30,11 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('deleteUser/{id}','UserController@deleteUser');
 
     // meal 
-    Route::post('addMeal', 'MealController@addMeal');
     Route::post('updateMeal/{id}', 'MealController@updateMeal');
     Route::delete('removeMeal', 'MealController@removeMeal');
+    Route::get('getAllMeal', 'MealController@getAllMeal');
+    // Route::get('searchMeal', 'MealController@searchMeal');
+    Route::get('meals/pagination', 'MealController@pagination');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

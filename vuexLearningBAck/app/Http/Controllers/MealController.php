@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Meal;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -13,14 +13,17 @@ class MealController extends Controller
         $meal->name = $request->name;
         $meal->description = $request->description;
         if($request->image){
-            $image = $request->image;
+            $image = $request->image;  // your base64 encoded
             list($type, $image) = explode(';', $image);
-            list(, $image) = explode(',', $image);
+            list(, $image)      = explode(',', $image);
             $data = base64_decode($image);
-            $imageName = date("YmdHis"). '.'.jpeg;
+            $imageName = date("YmdHis"). '.' . 'jpeg';
             file_put_contents(public_path() . '/' . 'images/meal/' . $imageName, $data);
             $meal->image = $imageName ;
-        } 
+        }
+
+      
+
         $meal->save();
         return $meal;
     }
@@ -60,7 +63,7 @@ class MealController extends Controller
         }
         return $users->orderBy('created_at', 'desc')->paginate(10);
     }
-    public function search(Request $request) 
+    public function searchMeal(Request $request) 
     {
         $user = Meal::query();
         if ($request->input('searchkey') != "") {
@@ -71,5 +74,9 @@ class MealController extends Controller
             });
         }
         return $user->orderBy('created_at', 'asc')->get();
+    }
+
+    public function getAllmeal(){
+        return Meal::get();
     }
 }

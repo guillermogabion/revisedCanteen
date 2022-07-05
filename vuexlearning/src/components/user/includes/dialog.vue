@@ -1,8 +1,9 @@
 <template>
     <v-dialog
-      v-model="dialog"
-        persistent
-        width="30%"
+    transition="dialog-top-transition"
+    v-model="dialog"
+    persistent
+    width="29%"
     >
     <v-form
             ref="form"
@@ -11,16 +12,18 @@
             class="padding"
         >
       <v-card>
-        <div class="card-text">
-            <span class="card-text-item"> Create New User </span>
-        </div>
+             <v-toolbar
+                color="Green"
+                dark
+                >
+                Create New User 
+             </v-toolbar>
             <div class="card-text-input">
                     <v-flex xs10>
                         <v-text-field
                             v-model = "payload.lastname"
                             label="Last Name"
                             required
-                            :counter="20"
                             :rules="lastnameRules"
                         ></v-text-field>
                     </v-flex>
@@ -29,7 +32,6 @@
                             v-model = "payload.firstname"
                             label="First Name"
                             required
-                            :counter="20"
                             :rules="firstnameRules"
                         ></v-text-field>
                     </v-flex>
@@ -37,8 +39,7 @@
                         <v-text-field
                             v-model = "payload.email"
                             label="Email"
-                            required
-                            :counter="20"
+                            required                           
                             :rules="emailRules"
                         ></v-text-field>
                     </v-flex>
@@ -55,7 +56,8 @@
                      <v-flex xs10>
                         <v-select dense v-model="types" :items="user_type" item-text="type"  item-value="number"
                             persistent-hint return-object prepend-icon="mdi-map" label="User Type">
-                        </v-select>    
+                        </v-select> 
+                        <span style="font-size: 10px;">password (Default password for New User)</span>   
                     </v-flex>
                 </div>
         
@@ -63,7 +65,7 @@
             <v-spacer></v-spacer>
             <div class="card-text-button">
                 <v-btn
-                    color="primary"
+                    color="#06aed5"
                     class="mb-2"
                     dark   
                     @click.prevent ="savenew()"  
@@ -72,9 +74,9 @@
                     Save
                 </v-btn>
             </div>
-            <div>
+            <div card-text-button>
                 <v-btn
-                    color="primary"
+                    color="#06aed5"
                     class="mb-2"
                     dark
                     @click = "close()"
@@ -82,6 +84,7 @@
                     Close
                 </v-btn>
             </div>
+            <v-spacer></v-spacer>
         </v-card-actions>
      </v-card>
     </v-form>
@@ -119,11 +122,11 @@
             valid: true,
              firstnameRules: [
             v => !!v || 'First Name is required',
-            v => (v && v.length <= 20) || 'First Name must be less than 20 characters',
+        
             ],
             lastnameRules: [
             v => !!v || 'Last Name is required',
-            v => (v && v.length <= 20) || 'Last Name must be less than 10 characters',
+         
             ],
             emailRules: [
                 v => !!v || 'E-mail is required',
@@ -147,6 +150,7 @@
                this.$emit('reload')
                this.snackbar = true
                this.clearInput()
+               this.reset()
             })
         },
         clearInput(){
@@ -158,7 +162,10 @@
         },
         close(){
              this.$emit('close')
-        }
+        },
+        reset(){
+            this.$refs.form.resetValidation()
+        },
     },
      props: {
         dialog:{
@@ -187,5 +194,7 @@
     }
     .card-text-button {
         padding-right: 3%;
+        padding-left: 3%;
     }
+    
 </style>

@@ -21,7 +21,6 @@
                             v-model = "payload.lastname"
                             label="Last Name"
                             required
-                            :counter="20"
                             :rules="lastnameRules"
                         ></v-text-field>
                     </v-flex>
@@ -30,7 +29,6 @@
                             v-model = "payload.firstname"
                             label="First Name"
                             required
-                            :counter="20"
                             :rules="firstnameRules"
                         ></v-text-field>
                     </v-flex>
@@ -39,7 +37,6 @@
                             v-model = "payload.email"
                             label="Email"
                             required
-                            :counter="20"
                             :rules="emailRules"
                         ></v-text-field>
                     </v-flex>
@@ -64,7 +61,7 @@
             <v-spacer></v-spacer>
             <div class="card-text-button">
                 <v-btn
-                    color="primary"
+                    color="#06aed5"
                     class="mb-2"
                     dark   
                     @click = "editUser()"
@@ -75,7 +72,7 @@
             </div>
             <div>
                 <v-btn
-                    color="primary"
+                    color="#06aed5 "
                     class="mb-2"
                     dark
                     @click = "close()"
@@ -83,6 +80,7 @@
                     Close
                 </v-btn>
             </div>
+            <v-spacer></v-spacer>
         </v-card-actions>
      </v-card>
     </v-form>
@@ -118,11 +116,9 @@
             valid: true,
             firstnameRules: [
             v => !!v || 'First Name is required',
-            v => (v && v.length <= 20) || 'First Name must be less than 20 characters',
             ],
             lastnameRules: [
             v => !!v || 'Last Name is required',
-            v => (v && v.length <= 20) || 'Last Name must be less than 10 characters',
             ],
             emailRules: [
                 v => !!v || 'E-mail is required',
@@ -151,7 +147,7 @@
         watch: {
         '$store.getters.newRequestedId'(newVal) {
             if(newVal) {
-            console.log('sad')
+            console.log('IdRequest')
             }
         },
         'item'() {

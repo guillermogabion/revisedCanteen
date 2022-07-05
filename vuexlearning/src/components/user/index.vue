@@ -15,7 +15,6 @@
     <v-data-table
       :headers="headers"
       :items="users"
-      sort-by="calories"
       class="elevation-1"
       hide-default-footer
       :items-per-page="itemsPerPage"
@@ -47,7 +46,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  color="primary"
+                  color="#f0c808"
                   dark
                   class="mb-2"
                   v-bind="attrs"
@@ -102,12 +101,12 @@
         </v-card-text>
          <v-card-actions class="justify-end">
             <v-btn
-                  @click="deleteUser()"
-                  text
-                >Okay</v-btn>
+              @click="deleteUser()"
+              text
+            >Okay</v-btn>
             <v-btn
               text
-              @click="dialog.value = false"
+              @click="dialogDelete = false"
             >Cancel</v-btn>
           </v-card-actions>
       </v-card>
@@ -209,7 +208,7 @@ import UserEdit from './includes/editDialog.vue'
             //     });
             // },
             reload(){
-              this.getUser();
+              this.indexUser();
             },
             deleteItem(item){
               this.editedIndex = this.users.indexOf(item)
@@ -280,6 +279,7 @@ import UserEdit from './includes/editDialog.vue'
                 });
               },800);
             },
+            
 
         },
        
