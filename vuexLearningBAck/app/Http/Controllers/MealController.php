@@ -29,15 +29,15 @@ class MealController extends Controller
     }
 
     public function updateMeal(Request $request, $id) {
-        $meal = Meal::find($id);
+        $meal = Meal::findorfail($id);
         $meal->name = $request->name;
         $meal->description = $request->description;
         if($request->image){
-            $image = $request->image;
+            $image = $request->image;  // your base64 encoded
             list($type, $image) = explode(';', $image);
-            list(, $image) = explode(',', $image);
+            list(, $image)      = explode(',', $image);
             $data = base64_decode($image);
-            $imageName = date("YmdHis"). '.'.jpeg;
+            $imageName = date("YmdHis"). '.' . 'jpeg';
             file_put_contents(public_path() . '/' . 'images/meal/' . $imageName, $data);
             $meal->image = $imageName ;
         } 
@@ -77,6 +77,7 @@ class MealController extends Controller
     }
 
     public function getAllmeal(){
-        return Meal::get();
+        $meal = Meal::get();
+        return $meal;
     }
 }

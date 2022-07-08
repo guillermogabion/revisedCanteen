@@ -1,37 +1,33 @@
-
-
-  
 <template>
-    <v-navigation-drawer
-      :value="drawer"
-      :clipped="$vuetify.breakpoint.lgAndUp"
-      app
-      style="top:8px !important; min-height:100vh !important;"
-    >
-      <v-img contain
-        :src="logo"
-        size="1"
-        max-height="100"
-        max-width="200"
-        class="mx-auto"
-      />
-      <v-list dense>
-        <template v-for="item in items">
-          <v-row
-            v-if="item.heading"
-            :key="item.heading"
-            align="center"
-          >
-          </v-row>
+  <v-navigation-drawer
+    :value="drawer"
+    :clipped="$vuetify.breakpoint.lgAndUp"
+    app
+    style="top:8px !important; min-height:100vh !important;"
+  >
+    <v-img contain
+      :src="logo"
+      size="1"
+      max-height="100"
+      max-width="200"
+      class="mx-auto"
+    />
+    <v-list dense>
+      <template v-for="item in items">
+        <v-row
+          v-if="item.heading"
+          :key="item.heading"
+          align="center"
+        ></v-row>
+        <template v-else-if="item.children">
           <v-list-group
-            v-else-if="item.children"
+            v-if="itemChecker(item.text)"
             :key="item.text"
             v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
           >
             <template v-slot:activator>
-              <v-list-item
-                >
+              <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title >
                     {{ item.text }}
@@ -54,8 +50,10 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
+        </template>
+        <template v-else>
           <v-list-item
-            v-else
+            v-if="itemChecker(item.text)"
             :key="item.text"
             link :to="item.url"
           >
@@ -69,22 +67,9 @@
             </v-list-item-content>
           </v-list-item>
         </template>
-      </v-list>
-      <template v-slot:append>
-                <div class="pa-2"  style="padding-left: 30%;">
-                    <template v-if="drawer">
-                        <v-btn icon @click.stop="logout()">
-                           <span> Logout </span>
-                        </v-btn>
-                    </template>
-                    <template v-else>
-                        <v-btn block @click.stop="logout">
-                          Logout
-                        </v-btn>
-                    </template>
-                </div>
-            </template>
-    </v-navigation-drawer>
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 <script>
   import logo from '@/assets/images/logo.png'
@@ -93,7 +78,7 @@
       source: String,
     },
     computed : {
-      drawer(){
+      drawer() {
         return this.$store.state.sidebar
       }
     },
@@ -103,39 +88,52 @@
         { icon: 'mdi-view-dashboard', text: 'Dashboard' ,url:'/' },
         { icon: 'mdi-history', text: 'Purchases' ,url:'/purchases' },
         { icon: 'mdi-cart', text: 'Orders' ,url:'/orders' },
-        { icon: 'mdi-food', text: 'Meals' ,url:'/meals' },
+        { icon: 'mdi-timetable', text: 'Scheduled Dish' ,url:'/scheduledDish' },
+        { icon: 'mdi-food', text: 'Dish' ,url:'/meals' },
         { icon: 'mdi-food-fork-drink', text: 'Add Ons' ,url:'/addons' },
         { icon: 'mdi-cash-check', text: 'Payments' ,url:'/payments' },
-   
+      
         {
-          icon: ' mdi-tools',
-          'icon-alt': 'mdi-tools',
+          
+          icon: 'mdi-settings',
+          'icon-alt': 'mdi-settings',
           text: 'Settings',
           model: false,
           children: [
-            { icon: 'mdi mdi-account-edit', text: 'User Settings' , url:'/users'        
-            },
-            // { icon: 'mdi-account-group', text: 'View All User' , url:'/view'        
-            // },
-            // { icon: 'mdi mdi-account-check', text: 'Update User' , url:'/update'        
-            // },
-            // { icon: 'mdi mdi-account-remove', text: 'Delete User' , url:'/delete'        
-            // },
+            { icon: 'mdi mdi-account-edit', text: 'User Settings' , url:'/user' },
           ],
         },
       ],
       newOrderRecords:0
     }),
-    methods: {
-       logout() {
-        localStorage.setItem('token', '')
-        location.reload();
-      },
-    },
     watch: {
       '$store.getters.newOrderRecords'(newVal) {
         this.newOrderRecords = newVal
       }
+    },
+    methods:{
+      itemChecker(item){
+        let user_accepts = ['Dashboard','Scheduled Dish', 'Orders', 'Payments' ]
+        if(this.$is_admin()){
+          return true
+        }
+        else if( user_accepts.includes(item)){
+          return true
+        }
+        else {
+          return false
+        }
+      },
     }
   }
 </script>
+
+
+
+
+
+
+
+
+
+ 

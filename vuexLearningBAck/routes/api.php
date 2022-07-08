@@ -32,13 +32,20 @@ Route::middleware('auth:api')->group(function () {
     // meal 
     Route::post('updateMeal/{id}', 'MealController@updateMeal');
     Route::delete('removeMeal', 'MealController@removeMeal');
-    Route::get('getAllMeal', 'MealController@getAllMeal');
     // Route::get('searchMeal', 'MealController@searchMeal');
     Route::get('meals/pagination', 'MealController@pagination');
+    
+    // scheduledishes 
+    Route::post('addDishSchedule', 'ScheduledDishController@addDishSchedule');
+    Route::post('updateScheduledDish/{id}', 'ScheduledDishController@updateScheduledDish');
+    Route::post('deleteScheduledDish/{id}', 'ScheduledDishController@deleteScheduledDish');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('getScheduledDish', 'ScheduledDishController@scheduledDish');
 
+
+Route::get('getAllMeal', 'MealController@getAllMeal');

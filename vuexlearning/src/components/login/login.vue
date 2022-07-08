@@ -47,6 +47,15 @@
               <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="timeout"
+          color="error"
+          top 
+          right
+          >
+          Error Credentials, Please try Again
+        </v-snackbar>
   </div>
 </template>
 
@@ -62,7 +71,8 @@ export default {
         return {
             logo,
             email: '',
-            password: ''
+            password: '',
+            snackbar:false
      
         }
     },
@@ -80,7 +90,7 @@ export default {
                       this.$router.push({ name: "dashboard"});
                   }).catch((errors)=> {
                       console.log(errors)
-                      alert('Error Credentials')
+                     this.snackbar = true
                      
                   })
                         

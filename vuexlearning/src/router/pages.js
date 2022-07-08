@@ -5,6 +5,7 @@ import Addons from '@/components/addons/index.vue'
 import Payment from '@/components/payment/index.vue'
 import Dashboard from '@/components/dashboard/index.vue'
 import Users from '@/components/user/index.vue'
+import ScheduledDish from '@/components/scheduledDish/index.vue'
 
 export default [{
 
@@ -37,6 +38,12 @@ export default [{
 
     },
     {
+        path: '/scheduledDish',
+        name: 'scheduledDish',
+        component: ScheduledDish,
+        meta: { authOnly: true }
+    },
+    {
         path: '/addons',
         name: 'addons',
         component: Addons,
@@ -50,8 +57,8 @@ export default [{
 
     },
     {
-        path: '/users',
-        name: 'users',
+        path: '/user',
+        name: 'user',
         component: Users,
         meta: { authOnly: true }
 

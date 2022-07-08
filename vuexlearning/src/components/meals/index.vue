@@ -81,6 +81,8 @@
         fixed
         width="500"
         height="500"
+        @closeDrawer = "closeDrawer"
+        @closeDraw = "closeDraw"
         temporary
       >
         <editDish :item="selected_item" @closeDrawer = "closeDrawer" @closeDraw = "closeDraw"/>
@@ -170,12 +172,14 @@ import addDialog from './includes/add.vue';
           
             close(){
               this.dialog = false
+             
             },
-             editItem(item){
-              this.selected_item = JSON.parse(JSON.stringify(item))
-              this.$nextTick(()=> {
-                this.drawer = true;
-              })
+           
+            editItem(item){
+            this.selected_item = JSON.parse(JSON.stringify(item))
+            this.$nextTick(()=> { 
+              this.drawer = true;
+            })
             },
              closeDraw(){
               this.drawer = false
@@ -183,7 +187,7 @@ import addDialog from './includes/add.vue';
             closeDrawer(){
               this.snackbar2 = true
               this.drawer = false
-              this.indexUser();
+              this.indexMeal()
             },
             reload(){
                this.indexMeal();

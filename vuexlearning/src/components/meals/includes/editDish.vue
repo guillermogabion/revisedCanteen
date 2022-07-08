@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card
-        
+        height="500" 
         >
             <v-form
                 ref="form"
@@ -9,20 +9,16 @@
                 v-model="valid"
                 class="padding"
             >
-                <v-card
-                height="500"
-                >
-                    <v-toolbar
-                        color="Green"
-                        dark
-                        >
-                        Edit Dish Information
-                    </v-toolbar>
-                     <v-flex xs12>
+              
+             
+                    <span class="text">Edit Dish Information</span>
+                    <!-- </template> -->
+                     <v-flex xs10>
                             <div class="js--image-preview" style="margin: auto; padding-left: 30%; padding-top: 5%;">
                                 <v-img
-                                 style="width: 200px; height: 180px;"
-                                 :src="payload.image "
+                                contain
+                                style="width: 200px; height: 180px;"
+                                 :src="payload.image ? payload.image : food_logo "
                                 >
                                     
                                 </v-img>
@@ -38,17 +34,47 @@
                                     />
                                 </label>
                             </div>
-                         
                         </v-flex>
-                        <v-flex xs10>
+                        <v-flex xs12>
                             <v-text-field
                             v-model = "payload.name"
                             label="Name"
                             required                           
                         ></v-text-field>
                         </v-flex>
+                         <v-flex xs12>
+                            <v-text-field
+                            v-model = "payload.description"
+                            label="Name"
+                            required                           
+                        ></v-text-field>
+                        </v-flex>
+                         <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <div class="card-text-button">
+                                <v-btn
+                                    color="#06aed5"
+                                    class="mb-2"
+                                    dark   
+                                    @click = "editMeal()"
+                                    :disabled="!valid"        
+                                >
+                                    Save
+                                </v-btn>
+                            </div>
+                            <div>
+                                <v-btn
+                                    color="#06aed5 "
+                                    class="mb-2"
+                                    dark
+                                    @click = "close()"
+                                >
+                                    Close
+                                </v-btn>
+                            </div>
+                            <v-spacer></v-spacer>
+                        </v-card-actions>
 
-                </v-card>
 
             </v-form>
         </v-card>
@@ -57,6 +83,9 @@
 
 <script>
 import logo from '@/assets/images/logo.png'
+// import axios from 'axios';
+import food_logo from '@/assets/images/logo.png'
+import { editMeal } from '@/repositories/meal.api'
 export default {
      props: {
             item: {
@@ -70,6 +99,8 @@ export default {
             payload: [],
             valid: true,
             logo,
+            food_logo,
+            drawer: true
         }
     },
     methods: {
@@ -87,6 +118,22 @@ export default {
             reader.readAsDataURL(file)
         },
 
+        editMeal(){
+            editMeal(this.payload.id, this.payload).then(({res}) => {
+                console.log(res)
+                this.$emit('closeDrawer')
+            })
+        },
+        close(){
+           this.$emit('closeDraw')
+            // const imageInput = document.getElementById('fileData');
+            // imageInput.value = ''
+            // this.payload.description = ''
+            // this.payload.name = ''
+
+            // console.log("HAHAHAH")
+        }
+
     },
     watch : {
         '$store.getters.newRequestedId'(newVal) {
@@ -100,3 +147,12 @@ export default {
     }
 }
 </script>
+
+<style>
+.text{
+    font-size: medium;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+</style>

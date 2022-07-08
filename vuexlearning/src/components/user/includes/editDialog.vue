@@ -1,6 +1,7 @@
  <template>
     <div>
         <v-card
+        height="500"
         >
             <v-form
             ref="form"
@@ -9,9 +10,7 @@
             class="padding"
           
         >
-      <v-card
-      height = "500"
-      >
+     
         <div class="card-text">
             <span class="card-text-item"> Edit User's Information</span>
         </div>
@@ -82,7 +81,6 @@
             </div>
             <v-spacer></v-spacer>
         </v-card-actions>
-     </v-card>
     </v-form>
     <!-- <v-snackbar
     v-model="snackbar"

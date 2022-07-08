@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\ScheduledDish;
 class Meal extends Model
 {
     //
@@ -12,5 +12,9 @@ class Meal extends Model
         if($value){
             return asset('images/meal/'. $value);
         }
+    }
+
+    public function dishes(){
+        return $this->belongsTo(ScheduledDish::class);
     }
 }
