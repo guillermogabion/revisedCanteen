@@ -2,11 +2,18 @@
     <v-dialog
     v-model="dialog"
     persistent
-    width="29%"
+    max-height="400" 
+    max-width="400"
+    min-height="500" 
+    min-width="29%"
     >
-        <v-card> 
-        <v-card-title class="text-h5 grey lighten-2">
-                Add New Dish
+        <v-card
+            width="350"
+            class="over"
+        > 
+        <v-card-title class="grey" width="350">
+            <v-card-text class="texts">Add New Dish</v-card-text>
+                
         </v-card-title>
             <v-form
                 ref="form"
@@ -14,17 +21,18 @@
                 v-model="valid"
                 class="padding"
             >
-                <v-row no-gutters>
-                    <v-col md="6.5">
-                        <v-flex xs12>
-                            <div class="js--image-preview" style="margin: auto; padding-left: 35%; padding-top: 5%;">
+              
+                  
+                        <v-flex xs10>
+                            <div class="js--image-preview" style="margin: auto; padding-left: 30%; padding-top: 5%;">
                                 <v-img
+                                contain
                                  style="width: 200px; height: 134px;"
                                  :src="payload.image || logo"
                                 >
                                 </v-img>
                             </div>
-                            <div class="upload-options" required style="padding-top: 15px;  padding-left: 29%;">
+                            <div class="upload-options" required style="padding-top: 15px;  padding-left: 25%;">
                                 <label>
                                     <input type="file"
                                             id="fileData"
@@ -60,8 +68,7 @@
                             ></v-text-field>
                             </div>
                         </v-flex>
-                    </v-col>
-                </v-row>
+            
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <div style="padding-right: 2%;">
@@ -193,5 +200,11 @@ export default {
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
 }
-
+.over{
+ overflow-y: hidden;   
+}
+.texts {
+    font-size: medium;
+    font-weight: bold;
+}
 </style>

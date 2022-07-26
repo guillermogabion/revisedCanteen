@@ -1,14 +1,17 @@
 <template>
-    <div>
+    <div
+    min-height="500" 
+    min-width="100">
          <v-card
-        height="900" 
+        min-height="500" 
+        min-width="100"
         >
          
         <v-card
         class="size"
-        height="900" 
         >
             <v-data-table
+            
                 :headers="headers"
                 :items="meals"
                 class="elevation-1"
@@ -20,8 +23,9 @@
                 @page-count="pageCount = $event"
                 :server-items-length="total_meal"
                 @pagination="fetchMealData"
-            >
-             <template v-slot:top>
+                :mobile-breakpoint="0"
+            > 
+                <template v-slot:top>
                  <v-toolbar
                     flat
                     >
@@ -76,8 +80,9 @@
          <v-dialog
             v-model="dialog"
             persistent
-            width="15%"
-            height="50%"
+            min-width="15%"
+            min-height="50%"
+            width="500"
             >
             <v-card>
                 <div class="padding">
@@ -87,8 +92,9 @@
                     <v-img
                         contain
                         :alt="editedItem.image"
+                        min-width="40%"
                         max-height="150"
-                        max-width="250"
+                        max-width="88%"
                         :src="editedItem.image ? editedItem.image : logo"
                     ></v-img>
                 </div>
@@ -100,14 +106,17 @@
                 <v-card-text>
                     <span class="font-text">{{editedItem.description}}</span>
                 </v-card-text>
-                <div>
+                <div
+                 padding="10%"
+                >
                     <v-text-field
+                    class="pa-6 ma-1"
                         v-model=" editedItem.price"
                         label="Price"
                     ></v-text-field>
                 </div>
                 <div
-                class="padding"
+                class="padding pa-6 ma-1"
                 >
                     <v-menu
                         v-model="menu2"

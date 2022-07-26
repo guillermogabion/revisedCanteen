@@ -31,7 +31,7 @@ export default [{
         meta: { authOnly: true }
     },
     {
-        path: '/meals',
+        path: '/dish',
         name: 'meals',
         component: Meals,
         meta: { authOnly: true }

@@ -61,6 +61,7 @@
               <v-btn
                color="success"
                text
+               v-show="!$is_admin()"
               >
                 Reserve
               </v-btn>
@@ -73,7 +74,7 @@
         right
         v-model="drawer"
         fixed
-        width="800"
+        max-width="60%"
         height="900"
        
         temporary

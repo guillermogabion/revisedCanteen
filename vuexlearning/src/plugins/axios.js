@@ -1,7 +1,9 @@
 import axios from "axios";
 import router from '@/router'
 // const baseDomain = "http://127.0.0.1:9090";
-const baseDomain = "http://127.0.0.1:8000";
+// const baseDomain = "http://127.0.0.1:8000";
+const baseDomain = "http://192.168.2.214:8000";
+
 // const baseDomain = "https://canteen-back.checkmy.dev";
 const baseURL = `${baseDomain}/api`; // Incase of /api/v1;
 

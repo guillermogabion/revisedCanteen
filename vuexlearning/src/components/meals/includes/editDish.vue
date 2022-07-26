@@ -45,7 +45,7 @@
                          <v-flex xs12>
                             <v-text-field
                             v-model = "payload.description"
-                            label="Name"
+                            label="Description"
                             required                           
                         ></v-text-field>
                         </v-flex>
@@ -85,7 +85,7 @@
 import logo from '@/assets/images/logo.png'
 // import axios from 'axios';
 import food_logo from '@/assets/images/logo.png'
-import { editMeal } from '@/repositories/meal.api'
+import { editMeal, editMealNoPic } from '@/repositories/meal.api'
 export default {
      props: {
             item: {
@@ -97,11 +97,13 @@ export default {
     data() {
         return {
             payload: [],
+            payload1: [],
             valid: true,
             logo,
             food_logo,
-            drawer: true
+            drawer: true,
         }
+
     },
     methods: {
         onFileChange(e) {
@@ -119,10 +121,23 @@ export default {
         },
 
         editMeal(){
-            editMeal(this.payload.id, this.payload).then(({res}) => {
+            const imageLabel = document.getElementById('fileData');
+
+             if(imageLabel.value == ''){
+                editMealNoPic(this.payload.id, this.payload).then(({res}) => {
                 console.log(res)
                 this.$emit('closeDrawer')
-            })
+                })
+             }
+             else{
+                editMeal(this.payload.id, this.payload).then(({res}) => {
+                console.log(res)
+                this.$emit('closeDrawer')
+
+             })
+             }
+
+            // console.log
         },
         close(){
            this.$emit('closeDraw')

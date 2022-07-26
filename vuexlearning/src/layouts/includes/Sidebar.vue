@@ -3,15 +3,18 @@
     :value="drawer"
     :clipped="$vuetify.breakpoint.lgAndUp"
     app
-    style="top:8px !important; min-height:100vh !important;"
+    style="min-height:100vh !important;"
   >
-    <v-img contain
-      :src="logo"
-      size="1"
-      max-height="100"
-      max-width="200"
-      class="mx-auto"
-    />
+    <div style="padding-top: 10px;">
+      <v-img 
+        contain
+        :src="logo"
+        size="1"
+        max-height="100"
+        max-width="200"
+        class="mx-auto"
+      />
+    </div>
     <v-list dense>
       <template v-for="item in items">
         <v-row
@@ -89,7 +92,7 @@
         { icon: 'mdi-history', text: 'Purchases' ,url:'/purchases' },
         { icon: 'mdi-cart', text: 'Orders' ,url:'/orders' },
         { icon: 'mdi-timetable', text: 'Scheduled Dish' ,url:'/scheduledDish' },
-        { icon: 'mdi-food', text: 'Dish' ,url:'/meals' },
+        { icon: 'mdi-food', text: 'Dish' ,url:'/dish' },
         { icon: 'mdi-food-fork-drink', text: 'Add Ons' ,url:'/addons' },
         { icon: 'mdi-cash-check', text: 'Payments' ,url:'/payments' },
       

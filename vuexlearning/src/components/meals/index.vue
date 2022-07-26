@@ -1,9 +1,8 @@
 <template>
   <div>
 
-   
-
     <v-data-table
+      mobile-breakpoint="300"
       :headers="headers"
       :items="meals"
       class="elevation-1"
@@ -27,6 +26,7 @@
                 filled
                 rounded
                 dense
+                
                 style="padding-top: 40px; padding-right: 10px;"
                 v-model="search"
                 :items='meals'
