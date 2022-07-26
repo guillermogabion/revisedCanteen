@@ -40,11 +40,20 @@ class MealController extends Controller
             $imageName = date("YmdHis"). '.' . 'jpeg';
             file_put_contents(public_path() . '/' . 'images/meal/' . $imageName, $data);
             $meal->image = $imageName ;
-        } 
-        $meal->save();
+
+         } 
+        $meal->save(); 
         return $meal;
     }
 
+
+    public function updateMealNoPic(Request $request, $id) {
+        $meal = Meal::findorfail($id);
+        $meal->name = $request->name;
+        $meal->description = $request->description;
+        $meal->save(); 
+        return $meal;
+    }
     public function removeMeal($id){
         $meal = Meal::find($id);
         $meal->destroy();

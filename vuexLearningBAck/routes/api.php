@@ -13,17 +13,21 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('loginTest','UserController@loginTrial');
 Route::post('login','UserController@login');
-Route::post('UserRegistration','UserController@UserRegistration');
+Route::post('UserRegistration','UserController@saveNew');
 Route::post('addMeal', 'MealController@addMeal');
 
 Route::post('/logout', 'UserControler@logout')->middleware('auth:api');
+Route::post('/logout2', 'UserControler@logout2')->middleware('auth:api');
 
 
 Route::middleware('auth:api')->group(function () {
     Route::get('self', 'UserController@self');
     
-    // user
+
+    Route::get('user', 'UserController@index');
+        // user
     Route::post('saveNew', 'UserController@saveNew');
     Route::post('editUser/{id}', 'UserController@editUser');
     Route::get('users/pagination','UserController@pagination');
@@ -31,6 +35,7 @@ Route::middleware('auth:api')->group(function () {
 
     // meal 
     Route::post('updateMeal/{id}', 'MealController@updateMeal');
+    Route::post('updateMealNoPic/{id}', 'MealController@updateMealNoPic');
     Route::delete('removeMeal', 'MealController@removeMeal');
     // Route::get('searchMeal', 'MealController@searchMeal');
     Route::get('meals/pagination', 'MealController@pagination');
