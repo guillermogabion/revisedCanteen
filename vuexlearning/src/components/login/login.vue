@@ -49,7 +49,7 @@
         </v-card>
         <v-snackbar
           v-model="snackbar"
-          :timeout="timeout"
+         
           color="error"
           top 
           right
